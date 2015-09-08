@@ -4,7 +4,7 @@
   "description": "A node.js app that takes out all this pesky html out of old documents.",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node main.js"
   },
   "repository": {
     "type": "git",
@@ -14,13 +14,13 @@
     "scraping",
     "removal"
   ],
-  "scripts": {
-    "start":"node main.js"
-  },
   "author": "Aaron Burdick",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/aburd/price_remover/issues"
   },
-  "homepage": "https://github.com/aburd/price_remover#readme"
+  "homepage": "https://github.com/aburd/price_remover#readme",
+  "dependencies": {
+    "fs": "0.0.2"
+  }
 }
