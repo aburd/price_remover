@@ -1,0 +1,26 @@
+{
+  "name": "price_remover",
+  "version": "1.0.0",
+  "description": "A node.js app that takes out all this pesky html out of old documents.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aburd/price_remover.git"
+  },
+  "keywords": [
+    "scraping",
+    "removal"
+  ],
+  "scripts": {
+    "start":"node main.js"
+  },
+  "author": "Aaron Burdick",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aburd/price_remover/issues"
+  },
+  "homepage": "https://github.com/aburd/price_remover#readme"
+}
