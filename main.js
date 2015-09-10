@@ -12,23 +12,30 @@ var fs = require('fs');
 	if(err){ 
 		console.log('something went wrong');
 	}
-		console.log(typeof files);
-		files.forEach( function(file, index, array){
-			
-			replaceText( path + '/' + file);
+		
+		files.forEach( function(file, index, array){	
+			replaceText( path + '/' + file, index, array);
 
 		});
 	});
 
 
 	// this reads the file and replaces the text
-	function replaceText(path, callback){
+	function replaceText(path, index, array, callback){
+
 		fs.readFile( path, { encoding:'utf8' } , function(err, body){
 			if (err) {
 				console.log('something horrible has happened.');
 			}
-			var modified = body.replace(regex, replacementText);
-			console.log(modified + '\n\n');
+			else if( index !== 0 ) {
+				var modified = body.replace(regex, replacementText);
+				console.log(array[index] + '\n++++++++++++++++++++++++');
+				console.log(modified + '\n\n');
+
+				fs.writeFile('output.txt', modified, 'utf8', function(){
+					console.log('All done.');
+				});
+			}
 		});
 
 		callback && callback();
