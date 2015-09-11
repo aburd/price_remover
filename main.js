@@ -33,7 +33,7 @@ var fs = require('fs');
 				console.log(modified + '\n\n');
 
 				fs.writeFile('output.txt', modified, 'utf8', function(){
-					console.log('All done.');
+					console.log( array[index] + ' has been logged in output.txt.');
 				});
 			}
 		});
