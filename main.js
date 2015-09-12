@@ -13,9 +13,12 @@ var fs = require('fs');
 		console.log('something went wrong');
 	}
 
-		files.forEach( function(file, index, array){	
+		files.forEach( function(file, index, array) {
+
+			console.log(file);
+
 		  // Don't do this for special or hidden files
-		  if( file[0]!== '.' ) {
+		  if( file[0]!== '.' && file != 'modified' ) {
 		 	//replaceText( path + file, index, array);			this uses the old code
 		    replaceTextOutputToFile(path, file, index, array);
 		  }
@@ -49,9 +52,11 @@ var fs = require('fs');
 	function replaceTextOutputToFile(path, name, index, array, callback) {
 
 		// Get contents of file
-		fs.readFile( path+name, {encoding:'utf8'} , function(err, body){
+		fs.readFile( path+name, { encoding:'utf8' } , function(err, body){
 			if(err) {
-				console.log('something horrible has happened.');
+				console.log("There was an error reading the file.");
+				console.log(err);
+				console.log('---');
 			}
 			else {
 				// replace text
