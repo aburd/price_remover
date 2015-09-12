@@ -1,10 +1,10 @@
 var fs = require('fs');	
 	// get the folder called files relative to the current dir
-	var path = __dirname+'/files';
+	var path = __dirname+'/files/';
 
 	var regex = /lorem/gi;
 	var replacementText = 'This is what haunts you';
-	var fileArr = [];
+	
 
 
 	// function to get files
@@ -12,9 +12,13 @@ var fs = require('fs');
 	if(err){ 
 		console.log('something went wrong');
 	}
-		
+
 		files.forEach( function(file, index, array){	
-			replaceText( path + '/' + file, index, array);
+		  // Don't do this for special or hidden files
+		  if( file[0]!== '.' ) {
+		 	//replaceText( path + file, index, array);			this uses the old code
+		    replaceTextOutputToFile(path, file, index, array);
+		  }
 
 		});
 	});
@@ -27,7 +31,7 @@ var fs = require('fs');
 			if (err) {
 				console.log('something horrible has happened.');
 			}
-			else if( index !== 0 ) {
+			else {
 				var modified = body.replace(regex, replacementText);
 				console.log(array[index] + '\n++++++++++++++++++++++++');
 				console.log(modified + '\n\n');
@@ -39,4 +43,36 @@ var fs = require('fs');
 		});
 
 		callback && callback();
+	}
+
+	// This function takes the body of the files and outputs a modified version to a filename with a similar name
+	function replaceTextOutputToFile(path, name, index, array, callback) {
+
+		// Get contents of file
+		fs.readFile( path+name, {encoding:'utf8'} , function(err, body){
+			if(err) {
+				console.log('something horrible has happened.');
+			}
+			else {
+				// replace text
+				var modifiedText = body.replace(regex, replacementText);
+				var modifiedPath = path + 'modified/';
+
+				// make directory if it doesn't exist for the modified files
+				fs.mkdir(modifiedPath, function(){
+					// open file or create it if it does not exist
+					fs.open(modifiedPath + 'modified' + name, 'w', function(err, fd){
+						if(err) {
+							console.log('Oh no, writing has failed!');
+						}
+						else {
+							fs.write(fd, modifiedText, function(err, written, buffer){
+								console.log(written + ' bytes written to ' + path + 'modified' + name);
+							});
+						}
+					});
+				});
+			}
+		});
+
 	}
