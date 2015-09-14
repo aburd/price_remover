@@ -2,8 +2,8 @@ var fs = require('fs');
 	// get the folder called files relative to the current dir
 	var path = __dirname+'/files/';
 
-	var regex = /lorem/gi;
-	var replacementText = 'This is what haunts you';
+	var regex = /[Your reg here]*/gi;
+	var replacementText = 'This is changed output';
 	
 
 
